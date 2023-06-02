@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhyc5awx1bpx3"]
+
+[ext_resource type="Script" path="res://SCRIPTS/Network/DictionaryCommunicator.cs" id="1_wk8i3"]
+
+[node name="DeckCreator" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1144.0
+offset_bottom = 639.0
+rotation = 1.58064e-05
+color = Color(0.278431, 0.333333, 0.403922, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer/MainRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_wk8i3")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/MainRect"]

@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://2l5k3fqh14um"]
+
+[ext_resource type="Script" path="res://SCRIPTS/Card/JapaneseCard.cs" id="1_gd6a7"]
+[ext_resource type="Script" path="res://SCRIPTS/Card/JapaneseCardNode.cs" id="2_o2725"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_2axb0"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1rmb2"]
+font_size = 30
+font_color = Color(0.0470588, 0.0392157, 0.00784314, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1144.0
+offset_bottom = 639.0
+rotation = 1.58064e-05
+color = Color(0.278431, 0.333333, 0.403922, 1)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MainRect"]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 18.993
+offset_right = 649.0
+offset_bottom = 325.993
+texture = SubResource("CanvasTexture_2axb0")
+script = ExtResource("1_gd6a7")
+
+[node name="CardNameLb" type="Label" parent="CanvasLayer/MainRect/TextureRect"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 49.0
+offset_right = 184.0
+offset_bottom = 109.0
+text = "qwe"
+label_settings = SubResource("LabelSettings_1rmb2")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_o2725")
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/MainRect"]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 397.993
+offset_right = 640.0
+offset_bottom = 439.993
+placeholder_text = "Answer..."
