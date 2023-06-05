@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://2l5k3fqh14um"]
 
-[ext_resource type="Script" path="res://SCRIPTS/Card/JapaneseCard.cs" id="1_gd6a7"]
-[ext_resource type="Script" path="res://SCRIPTS/Card/JapaneseCardNode.cs" id="2_o2725"]
+[ext_resource type="Script" path="res://SCRIPTS/Card/JapaneseCard.cs" id="1_ulk10"]
+[ext_resource type="Script" path="res://SCRIPTS/Card/JapaneseCardNode.cs" id="2_sx5hk"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_2axb0"]
 
@@ -28,7 +28,7 @@ offset_top = 18.993
 offset_right = 649.0
 offset_bottom = 325.993
 texture = SubResource("CanvasTexture_2axb0")
-script = ExtResource("1_gd6a7")
+script = ExtResource("1_ulk10")
 
 [node name="CardNameLb" type="Label" parent="CanvasLayer/MainRect/TextureRect"]
 layout_mode = 0
@@ -40,7 +40,7 @@ text = "qwe"
 label_settings = SubResource("LabelSettings_1rmb2")
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("2_o2725")
+script = ExtResource("2_sx5hk")
 
 [node name="LineEdit" type="LineEdit" parent="CanvasLayer/MainRect"]
 layout_mode = 0

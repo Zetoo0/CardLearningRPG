@@ -1,8 +1,12 @@
 
+using Godot;
+
 public abstract class Card {
 	public abstract string GetCardName();
 	public abstract string GetSolution();
 }
+
+
 
 public abstract class JapaneseCardBase : Card
 {
@@ -13,3 +17,4 @@ public abstract class JapaneseCardBase : Card
 	public abstract void SetKana(string kana);
 	public abstract void SetRomaji(string romaji);
 }
+

@@ -6,44 +6,45 @@ using Godot;
 
 public partial class DictionaryCommunicator : Node
 {
+	private string kanjiForReturn;
+	private Label lb;
 
-	public override void _Ready()
+	public void SetLabel(Label lb)
 	{
-		// Create an HTTP request node and connect its completion signal.
-		var httpRequest = new HttpRequest();
+		this.lb = lb;
+	}
+
+	/// <summary>
+	/// Get the kanji form from the API
+	/// </summary>
+	/// <param name="romaji"></param>
+	/// <returns></returns>
+	public void GetKanjiByRomaji(string romaji) {
+		
+	//	*/GD.Print(romaji);
+	
+		HttpRequest httpRequest = new HttpRequest();
+		//GD.Print(httpRequest.ToString());
 		AddChild(httpRequest);
 		httpRequest.RequestCompleted += HttpRequestCompleted;
-
-		bool fas = false;
-		/*Dictionary<object, object> data = new Dictionary<object, object>();
-		data.Add("query", "takai");
-		data.Add("language", "English");
-		data.Add("no_english", fas);
-		*/GD.Print("diksz");
-		// Perform a GET request. The URL below returns JSON as of writing.
-		//Error error = httpRequest.Request("https://httpbin.org/get");
-		//if (error != Error.Ok)
-		//{
-		//	GD.PushError("An error occurred in the HTTP request.");
-		//}
-
-		// Perform a POST request. The URL below returns JSON as of writing.
-		// Note: Don't make simultaneous requests using a single HTTPRequest node.
-		// The snippet below is provided for reference only.
-		Json jason = new Json();
-
-		var dict = new Dictionary(){ { "query", "takai" }, { "language", "English" }, { "no_english", false } };
+		
+		
+		var dict = new Dictionary(){ { "query", romaji }, { "language", "English" }, { "no_english", false } };
+		
 		string body = Json.Stringify(dict);
-
-	string[] head = {"accept: application/json", "content-type: application/json"};
-		GD.Print("diksz");
+		
+		string[] head = {"accept: application/json", "content-type: application/json"};
+		
 		Error error = httpRequest.Request("https://jotoba.de/api/search/words", head, HttpClient.Method.Post, body);
+		
 		if (error != Error.Ok)
 		{
 			GD.PushError("An error occurred in the HTTP request.");
 		}
-		GD.Print("diksz");
+
 	}
+	
+	
 
 // Called when the HTTP request is completed.
 	private void HttpRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
@@ -54,10 +55,11 @@ public partial class DictionaryCommunicator : Node
 		var response = json.Data.AsGodotDictionary();
 		var kanjiDic = response["kanji"];
 		var _KanjiLiteral = kanjiDic.AsGodotArray()[0].AsGodotDictionary()["literal"];
-		// Will print the user agent string used by the HTTPRequest node (as recognized by httpbin.org).
-		
-		
-		GD.Print(_KanjiLiteral);
+		string[] meanings = kanjiDic.AsGodotArray()[0].AsGodotDictionary()["meanings"].AsStringArray();
+
+		CardLabelDataSetter.actualKanji = _KanjiLiteral.ToString();
+		lb.Text = CardLabelDataSetter.actualKanji;
+		CardRes.CreateAndAddCardToDaDeck(CardLabelDataSetter.actualKanji,CardLabelDataSetter.actualRomaji,meanings);
 	}
 
 /*	public override void _Ready()

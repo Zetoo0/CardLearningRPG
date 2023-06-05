@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dhyc5awx1bpx3"]
+[gd_scene load_steps=7 format=3 uid="uid://dhyc5awx1bpx3"]
 
-[ext_resource type="Script" path="res://SCRIPTS/Network/DictionaryCommunicator.cs" id="1_wk8i3"]
+[ext_resource type="Script" path="res://SCENES/testLb.cs" id="1_dyt18"]
+[ext_resource type="Script" path="res://SCENES/DeckHandler.cs" id="1_njt0y"]
+[ext_resource type="Script" path="res://SCENES/RomajiBtn.cs" id="2_wefwt"]
+[ext_resource type="Script" path="res://SCENES/DeckContainer.cs" id="4_buw08"]
+[ext_resource type="Script" path="res://SCENES/SaveDeck.cs" id="4_qr504"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kblvk"]
+line_spacing = 1.0
+font_size = 30
+font_color = Color(0, 0, 0, 1)
 
 [node name="DeckCreator" type="Node2D"]
 
@@ -13,11 +22,70 @@ offset_right = 1144.0
 offset_bottom = 639.0
 rotation = 1.58064e-05
 color = Color(0.278431, 0.333333, 0.403922, 1)
+script = ExtResource("1_njt0y")
+metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer/MainRect"]
+[node name="testLb" type="Label" parent="CanvasLayer/MainRect"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-script = ExtResource("1_wk8i3")
+offset_left = 499.0
+offset_top = 219.0
+offset_right = 622.0
+offset_bottom = 279.0
+label_settings = SubResource("LabelSettings_kblvk")
+script = ExtResource("1_dyt18")
+metadata/_edit_use_anchors_ = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="CanvasLayer/MainRect"]
+
+[node name="LineEdit" type="LineEdit" parent="CanvasLayer/MainRect"]
+layout_mode = 0
+offset_left = 469.004
+offset_top = 381.987
+offset_right = 536.066
+offset_bottom = 412.987
+scale = Vector2(1.70514, 0.999981)
+placeholder_text = "Romaji"
+metadata/_edit_use_anchors_ = true
+
+[node name="AddCardBtn" type="Button" parent="CanvasLayer/MainRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00437424
+anchor_top = -0.00784867
+anchor_right = 0.00437424
+anchor_bottom = -0.00470895
+offset_left = 603.006
+offset_top = 381.99
+offset_right = 653.006
+offset_bottom = 412.99
+scale = Vector2(2.05771, 1.34937)
+text = "Add"
+script = ExtResource("2_wefwt")
+metadata/_edit_use_anchors_ = true
+
+[node name="SaveDeckBtn" type="Button" parent="CanvasLayer/MainRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0892382
+anchor_top = 0.109895
+anchor_right = -0.0892382
+anchor_bottom = 0.109895
+offset_left = 603.006
+offset_top = 381.99
+offset_right = 653.006
+offset_bottom = 412.99
+scale = Vector2(2.05771, 1.34937)
+text = "Save"
+script = ExtResource("4_qr504")
+metadata/_edit_use_anchors_ = true
+
+[node name="VFlowContainer" type="VFlowContainer" parent="CanvasLayer/MainRect"]
+clip_contents = true
+layout_mode = 0
+offset_left = 464.002
+offset_top = 95.9927
+offset_right = 703.002
+offset_bottom = 354.993
+script = ExtResource("4_buw08")
+
+[connection signal="pressed" from="CanvasLayer/MainRect/AddCardBtn" to="CanvasLayer/MainRect/VFlowContainer" method="_On_Add_Press"]

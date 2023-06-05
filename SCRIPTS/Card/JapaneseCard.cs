@@ -2,6 +2,8 @@ using Godot;
 using System;
 
 
+
+
 public class JapaneseCard : JapaneseCardBase
 {
 	
@@ -11,15 +13,12 @@ public class JapaneseCard : JapaneseCardBase
 	private string solution;
 	private string cardName;
 
-	public JapaneseCard()
-	{
-
+	public JapaneseCard() {
 		this.JP_Kana = "tesfghfgt";
 		this.JP_Kanji = "testghfg";
 		this.JP_Romaji = "test5464";
 		this.cardName = "test11";
 		this.solution = "test22";
-
 	}
 	
 	public override string GetKanji()
@@ -77,3 +76,5 @@ public class JapaneseCard : JapaneseCardBase
 		return base.ToString();
 	}
 }
+
+

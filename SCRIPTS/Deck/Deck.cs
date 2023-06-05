@@ -2,10 +2,16 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+//TODO create a deck resource based on this 
+
 public class Deck : DeckBase
 {
 	private List<Card> CardArray;
-	
+
+	public void SaveDeck()
+	{
+		
+	}
 
 	public override void AddCard(Card card)
 	{
