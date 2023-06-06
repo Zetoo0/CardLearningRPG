@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://dhyc5awx1bpx3"]
 
 [ext_resource type="Script" path="res://SCENES/testLb.cs" id="1_dyt18"]
-[ext_resource type="Script" path="res://SCENES/DeckHandler.cs" id="1_njt0y"]
+[ext_resource type="Script" path="res://SCRIPTS/Deck/DeckHandler.cs" id="1_fjw75"]
 [ext_resource type="Script" path="res://SCENES/RomajiBtn.cs" id="2_wefwt"]
-[ext_resource type="Script" path="res://SCENES/DeckContainer.cs" id="4_buw08"]
-[ext_resource type="Script" path="res://SCENES/SaveDeck.cs" id="4_qr504"]
+[ext_resource type="Script" path="res://SCRIPTS/Deck/DeckContainer.cs" id="5_2r272"]
+[ext_resource type="Script" path="res://SCRIPTS/UI/ButtonPressHandle.cs" id="6_hu8k7"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kblvk"]
 line_spacing = 1.0
@@ -22,7 +22,7 @@ offset_right = 1144.0
 offset_bottom = 639.0
 rotation = 1.58064e-05
 color = Color(0.278431, 0.333333, 0.403922, 1)
-script = ExtResource("1_njt0y")
+script = ExtResource("1_fjw75")
 metadata/_edit_use_anchors_ = true
 
 [node name="testLb" type="Label" parent="CanvasLayer/MainRect"]
@@ -76,7 +76,21 @@ offset_right = 653.006
 offset_bottom = 412.99
 scale = Vector2(2.05771, 1.34937)
 text = "Save"
-script = ExtResource("4_qr504")
+metadata/_edit_use_anchors_ = true
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer/MainRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.527562
+anchor_top = -0.601234
+anchor_right = -0.527562
+anchor_bottom = -0.601234
+offset_left = 603.006
+offset_top = 381.99
+offset_right = 653.006
+offset_bottom = 412.99
+scale = Vector2(2.05771, 1.34937)
+text = "<-"
 metadata/_edit_use_anchors_ = true
 
 [node name="VFlowContainer" type="VFlowContainer" parent="CanvasLayer/MainRect"]
@@ -86,6 +100,12 @@ offset_left = 464.002
 offset_top = 95.9927
 offset_right = 703.002
 offset_bottom = 354.993
-script = ExtResource("4_buw08")
+script = ExtResource("5_2r272")
 
-[connection signal="pressed" from="CanvasLayer/MainRect/AddCardBtn" to="CanvasLayer/MainRect/VFlowContainer" method="_On_Add_Press"]
+[node name="ButtonSignalHandler" type="Node" parent="CanvasLayer/MainRect"]
+script = ExtResource("6_hu8k7")
+
+[connection signal="button_down" from="CanvasLayer/MainRect/AddCardBtn" to="CanvasLayer/MainRect/ButtonSignalHandler" method="OnDeckAddBtnPressed"]
+[connection signal="button_up" from="CanvasLayer/MainRect/AddCardBtn" to="CanvasLayer/MainRect/VFlowContainer" method="_On_Add_Press"]
+[connection signal="pressed" from="CanvasLayer/MainRect/SaveDeckBtn" to="CanvasLayer/MainRect/ButtonSignalHandler" method="OnSaveBtnPressed"]
+[connection signal="pressed" from="CanvasLayer/MainRect/BackToMenu" to="CanvasLayer/MainRect/ButtonSignalHandler" method="OnBackToMenuPressed"]

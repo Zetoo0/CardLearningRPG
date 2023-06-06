@@ -10,15 +10,15 @@ public class JapaneseCard : JapaneseCardBase
 	private string JP_Kanji;
 	private string JP_Romaji;
 	private string JP_Kana;
-	private string solution;
+	private string[] means;
 	private string cardName;
 
-	public JapaneseCard() {
-		this.JP_Kana = "tesfghfgt";
-		this.JP_Kanji = "testghfg";
-		this.JP_Romaji = "test5464";
+	public JapaneseCard(string task, string sol, string[] mean, string[] addInf = default) {
+		//this.JP_Kana = "tesfghfgt";
+		this.JP_Kanji = task;
+		this.JP_Romaji = sol;
 		this.cardName = "test11";
-		this.solution = "test22";
+		this.means = mean;
 	}
 	
 	public override string GetKanji()
@@ -53,12 +53,12 @@ public class JapaneseCard : JapaneseCardBase
 
 	public override string GetCardName()
 	{
-		return this.cardName;
+		return this.JP_Kanji;
 	}
 
 	public override string GetSolution()
 	{
-		return this.solution;
+		return this.JP_Romaji;
 	}
 
 	public override bool Equals(object obj)

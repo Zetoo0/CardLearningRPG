@@ -3,23 +3,30 @@ using System;
 using System.Text;
 using Godot.Collections;
 using Godot;
-
+	
 public partial class DictionaryCommunicator : Node
 {
-	private string kanjiForReturn;
-	private Label lb;
+	//private HttpRequest httpRequest;
+	//private string kanjiForReturn;
+	//private Label lb;
 
-	public void SetLabel(Label lb)
+	/*public void SetLabel(Label lb)
 	{
 		this.lb = lb;
-	}
+	}*/
+
+	/*public override void _Ready()
+	{
+		httpRequest = new HttpRequest();
+		httpRequest.RequestCompleted += HttpRequestCompleted;
+	}*/
 
 	/// <summary>
 	/// Get the kanji form from the API
 	/// </summary>
 	/// <param name="romaji"></param>
 	/// <returns></returns>
-	public void GetKanjiByRomaji(string romaji) {
+	public  void GetKanjiByRomaji(string romaji) {
 		
 	//	*/GD.Print(romaji);
 	
@@ -46,7 +53,7 @@ public partial class DictionaryCommunicator : Node
 	
 	
 
-// Called when the HTTP request is completed.
+// Called when the HTTP request is completed, separate the kanji and it meanings and call the card create and add deck function
 	private void HttpRequestCompleted(long result, long responseCode, string[] headers, byte[] body)
 	{
 		GD.Print("dikszcompl");
@@ -58,24 +65,12 @@ public partial class DictionaryCommunicator : Node
 		string[] meanings = kanjiDic.AsGodotArray()[0].AsGodotDictionary()["meanings"].AsStringArray();
 
 		CardLabelDataSetter.actualKanji = _KanjiLiteral.ToString();
-		lb.Text = CardLabelDataSetter.actualKanji;
+		//lb.Text = CardLabelDataSetter.actualKanji;
+		//GD.Print(meanings[1]);
 		CardRes.CreateAndAddCardToDaDeck(CardLabelDataSetter.actualKanji,CardLabelDataSetter.actualRomaji,meanings);
 	}
-
-/*	public override void _Ready()
-	{
-		
-		
-
-
-
-		string[] dataToSend = {"takai", "English","false"};
-		string json = Json.Stringify(dataToSend);
-		string url = "https://jotoba.de/api/search/words";
-		string[] headers = new string[] { "content-type: application/json", "accept: application/json" };
-		HttpRequest httpRequest = GetNode<HttpRequest>("HTTPRequest");
-		httpRequest.Request(url, headers, HttpClient.Method.Post, json);
-*/	}		
+	
+}		
 
 	
 
