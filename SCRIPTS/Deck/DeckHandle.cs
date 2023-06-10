@@ -24,6 +24,12 @@ public partial class DeckHandle : Node
 	{
 		return currDeckCreate;
 	}
+
+	public static void SetDeckRes(DeckRess deckRes)
+	{
+		currDeckCreate = deckRes;
+		GD.Print("Deck res added: " + deckRes._cardList[0].GetTask());
+	}
 	
 }
 

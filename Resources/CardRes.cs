@@ -6,7 +6,7 @@ using MonoCustomResourceRegistry;
 
 
 [RegisteredType(nameof(CardRes))]
-public partial class CardRes : Resource
+public partial class CardRes : Resource, ICard//TODO implement ICard
 {
      private string task;
      private string solution;
@@ -31,6 +31,11 @@ public partial class CardRes : Resource
     public string GetTask()
     {
         return this.task;
+    }
+
+    public string GetCardName()
+    {
+        throw new NotImplementedException();
     }
 
     public string GetSolution()
