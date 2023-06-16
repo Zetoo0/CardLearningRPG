@@ -1,9 +1,10 @@
  using Godot;
 using System;
 
-public partial class DeckHandle : Node
+public partial class DeckHandle : Node, IDeckHandle
 {
 	public static DeckRess currDeckCreate;
+	public static CardRes currCardResInPlay;
 	public static DeckHandle _deckHandle;
 
 	public static void CreateDeckResource()
@@ -12,12 +13,24 @@ public partial class DeckHandle : Node
 		currDeckCreate = new DeckRess();
 	}
 
-	
+	public static string GetCurrentPlayCardSolution()
+	{
+		return currCardResInPlay.GetSolution();
+	}
+
+	public static string[] GetCurrentPlayCardAddInfo()
+	{
+		return currCardResInPlay.GetAdditionalInformations();
+	}
+
+	public static void SetCurrentPlayCardSol(string sol)
+	{
+		currCardResInPlay.SetSolution(sol);
+	}
 
 	public static void CreateDeckResource(DeckRess res)
 	{
 		currDeckCreate = res;
-		//GD.Print(currDeckCreate._cardList);
 	}
 	
 	public static DeckRess GetCurrentCreateDeck()

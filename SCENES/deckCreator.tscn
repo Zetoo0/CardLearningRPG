@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dhyc5awx1bpx3"]
+[gd_scene load_steps=9 format=3 uid="uid://dhyc5awx1bpx3"]
 
 [ext_resource type="Script" path="res://SCENES/testLb.cs" id="1_dyt18"]
 [ext_resource type="Script" path="res://SCRIPTS/Deck/DeckHandler.cs" id="1_fjw75"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://SCRIPTS/Deck/DeckContainer.cs" id="5_2r272"]
 [ext_resource type="Script" path="res://SCRIPTS/UI/TextFieldHandler.cs" id="6_7r1m6"]
 [ext_resource type="Script" path="res://SCRIPTS/UI/ButtonPressHandle.cs" id="6_hu8k7"]
+[ext_resource type="Script" path="res://SCRIPTS/UI/PopupWin.cs" id="7_eodiv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_kblvk"]
 line_spacing = 1.0
@@ -17,10 +18,9 @@ font_color = Color(0, 0, 0, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MainRect" type="ColorRect" parent="CanvasLayer"]
-offset_left = 1.0
-offset_top = 2.0
-offset_right = 1144.0
-offset_bottom = 639.0
+offset_left = -1.0
+offset_right = 1142.0
+offset_bottom = 637.0
 rotation = 1.58064e-05
 color = Color(0.278431, 0.333333, 0.403922, 1)
 script = ExtResource("1_fjw75")
@@ -123,6 +123,12 @@ script = ExtResource("6_hu8k7")
 
 [node name="TextFieldSignalHandler" type="Node" parent="CanvasLayer/MainRect"]
 script = ExtResource("6_7r1m6")
+
+[node name="PopupPanel" type="PopupPanel" parent="CanvasLayer/MainRect"]
+title = "asd"
+size = Vector2i(475, 482)
+max_size = Vector2i(31880, 32768)
+script = ExtResource("7_eodiv")
 
 [connection signal="text_submitted" from="CanvasLayer/MainRect/LineEdit" to="CanvasLayer/MainRect/TextFieldSignalHandler" method="SetRomajiText"]
 [connection signal="text_changed" from="CanvasLayer/MainRect/DeckNameTField" to="CanvasLayer/MainRect/TextFieldSignalHandler" method="SetDeckNameText"]

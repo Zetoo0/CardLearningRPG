@@ -54,11 +54,15 @@ public partial class DeckRess : Resource, IDeck//TODO Implements IDeck elkészí
        
         SaveDeckListToFile(deckName, DeckHandle.GetCurrentCreateDeck());
         
-         Error err = ResourceSaver.Save(DeckHandle.GetCurrentCreateDeck(),path: "res://SavedDeckRes/"+deckName+".tres",ResourceSaver.SaverFlags.None); 
-         if(!(err == Error.Ok)) GD.Print("There is a problem in da foooorce :')");
-         
+         Error err = ResourceSaver.Save(DeckHandle.GetCurrentCreateDeck(),path: "res://SavedDeckRes/"+deckName+".tres",ResourceSaver.SaverFlags.None);
+         if (!(err == Error.Ok))
+             PopupWin.PopupText("ERROR","Save Failed"); //GD.Print("There is a problem in da foooorce :')");
+         else
+         {
+             PopupWin.PopupText("Success","Successfully saved!");
+         }
          //DeckRess mashita = LoadDeck(deckName);
-        
+
     }
     
 /// <summary>
@@ -132,11 +136,22 @@ public static void SaveDeckListToFile(string deckName, DeckRess deck)//TODO add 
     {
         string[] fileName = namae.Split('.');
         GD.Print(fileName[0]);
-            var a = ResourceLoader.Load<DeckRess>("res://SavedDeckRes/"+fileName[0]+".tres","_cardList",ResourceLoader.CacheMode.Reuse);
-           a.LoadDeckListFromFile(fileName[0]);
-           GD.Print("newgec: " + a._cardList[0].GetMeanings()[1]);
-           DeckHandle.CreateDeckResource();
-           DeckHandle.SetDeckRes(a);
+        try
+        {
+            var a = ResourceLoader.Load<DeckRess>("res://SavedDeckRes/" + fileName[0] + ".tres", "_cardList",
+                ResourceLoader.CacheMode.Reuse);
+            a.LoadDeckListFromFile(fileName[0]);
+            GD.Print("newgec: " + a._cardList[0].GetMeanings()[1]);
+            DeckHandle.CreateDeckResource();
+            DeckHandle.SetDeckRes(a);
+            PopupWin.PopupText("Success","Deck successfully loaded!");    
+        }
+        catch (IOException e)
+        {
+            PopupWin.PopupText("ERROR","There was an error while loading");
+        }
+        
+
            //return a;
     }
 

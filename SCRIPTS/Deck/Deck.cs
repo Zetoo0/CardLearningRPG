@@ -1,24 +1,28 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 //TODO create a deck resource based on this 
 
-public class Deck : DeckBase
+public class Deck : IDeck
 {
-	private List<Card> CardArray;
+	private List<ICard> CardArray;
 
-	public void SaveDeck()
-	{
-		
-	}
 
-	public override void AddCard(Card card)
+
+	public void AddCard(ICard card)
 	{
 		CardArray.Add(card);
 	}
+	
 
-	public override Card GetCard(string name)
+	ICard IDeck.GetCard(string name)
+	{
+		throw new NotImplementedException();
+	}
+
+	public  ICard GetCard(string name)
 	{
 		bool isNotFound = true;
 		for (int i = 0; i < CardArray.Count; i++)
@@ -32,7 +36,7 @@ public class Deck : DeckBase
 		return null;
 	}
 
-	public override void Shuffle()
+	public  void Shuffle()
 	{
 		Random rnd = new Random();
 		for (int i = 0; i < CardArray.Count; i++)
@@ -40,25 +44,20 @@ public class Deck : DeckBase
 			int swapIndex = rnd.Next(0, CardArray.Count);
 			if (swapIndex != i)
 			{
-				Card temp = CardArray[swapIndex];
+				ICard temp = CardArray[swapIndex];
 				CardArray[swapIndex] = CardArray[i];
 				CardArray[i] = temp;
 			}
 		}
 	}
 
-	public override bool Equals(object obj)
+	public void AddCardToList(CardRes card)
 	{
-		return base.Equals(obj);
+		throw new NotImplementedException();
 	}
 
-	public override int GetHashCode()
+	public void WriteCardListToFile(ref StreamWriter sw_out)
 	{
-		return base.GetHashCode();
-	}
-
-	public override string ToString()
-	{
-		return base.ToString();
+		throw new NotImplementedException();
 	}
 }

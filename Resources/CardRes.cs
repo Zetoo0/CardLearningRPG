@@ -28,6 +28,11 @@ public partial class CardRes : Resource, ICard//TODO implement ICard
         this.solution = "romaji";
     }
 
+
+    public void SetSolution(string sol)
+    {
+        this.solution = sol;
+    }
     public string GetTask()
     {
         return this.task;
