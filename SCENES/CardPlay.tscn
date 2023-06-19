@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3 uid="uid://duiqo1l0k2j24"]
+
+[ext_resource type="Script" path="res://SCENES/DeckLoaderIntoPlay.cs" id="1_xsoie"]
+[ext_resource type="Script" path="res://SCRIPTS/UI/ButtonPressHandle.cs" id="2_b7nqf"]
+[ext_resource type="Script" path="res://SCRIPTS/AnswerCheckHandle.cs" id="3_a84a6"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("3_a84a6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainRect" type="ColorRect" parent="CanvasLayer"]
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 1144.0
+offset_bottom = 639.0
+rotation = 1.58064e-05
+color = Color(0.278431, 0.333333, 0.403922, 1)
+
+[node name="AnswerText" type="LineEdit" parent="CanvasLayer/MainRect"]
+layout_mode = 0
+offset_left = 386.006
+offset_top = 407.994
+offset_right = 563.006
+offset_bottom = 449.994
+placeholder_text = "Answer..."
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_left = 383.0
+offset_top = 35.0
+offset_right = 700.0
+offset_bottom = 385.0
+
+[node name="Deck" type="Node" parent="CanvasLayer/Panel"]
+script = ExtResource("1_xsoie")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 606.0
+offset_top = 409.0
+offset_right = 644.0
+offset_bottom = 443.0
+scale = Vector2(1.84, 1.28)
+text = "Ok"
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_b7nqf")
+
+[node name="AnswerChecker" type="Node" parent="."]
+script = ExtResource("3_a84a6")
+
+[connection signal="button_down" from="CanvasLayer/Button" to="AnswerChecker" method="StartCheck"]
+[connection signal="button_up" from="CanvasLayer/Button" to="CanvasLayer/Panel/Deck" method="ChangeCard"]
